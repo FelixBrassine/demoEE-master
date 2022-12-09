@@ -1,8 +1,8 @@
-package be.bstorm.akimts.demoee.servlets.servlets;
+package be.technobel.fbrassine.demoee.servlets.servlets;
 
-import be.bstorm.akimts.demoee.servlets.model.Voiture;
-import be.bstorm.akimts.demoee.servlets.service.GarageService;
-import be.bstorm.akimts.demoee.servlets.service.GarageServiceImpl;
+import be.technobel.fbrassine.demoee.servlets.model.Voiture;
+import be.technobel.fbrassine.demoee.servlets.service.GarageService;
+import be.technobel.fbrassine.demoee.servlets.service.GarageServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

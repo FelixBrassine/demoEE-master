@@ -1,4 +1,4 @@
-package be.bstorm.akimts.demoee.servlets.servlets;
+package be.technobel.fbrassine.demoee.servlets.servlets;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

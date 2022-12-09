@@ -1,6 +1,6 @@
-package be.bstorm.akimts.demoee.servlets.service;
+package be.technobel.fbrassine.demoee.servlets.service;
 
-import be.bstorm.akimts.demoee.servlets.model.Voiture;
+import be.technobel.fbrassine.demoee.servlets.model.Voiture;
 
 import java.util.ArrayList;
 import java.util.List;

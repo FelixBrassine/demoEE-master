@@ -1,4 +1,4 @@
-package be.bstorm.akimts.demoee.servlets.model;
+package be.technobel.fbrassine.demoee.servlets.model;
 
 public class Voiture {
 

@@ -1,8 +1,8 @@
-package be.bstorm.akimts.demoee.servlets.servlets;
+package be.technobel.fbrassine.demoee.servlets.servlets;
 
-import be.bstorm.akimts.demoee.servlets.model.Voiture;
-import be.bstorm.akimts.demoee.servlets.service.GarageService;
-import be.bstorm.akimts.demoee.servlets.service.GarageServiceImpl;
+import be.technobel.fbrassine.demoee.servlets.model.Voiture;
+import be.technobel.fbrassine.demoee.servlets.service.GarageService;
+import be.technobel.fbrassine.demoee.servlets.service.GarageServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,64 +19,37 @@ public class GetOneServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
 
-        resp.getWriter().println("""
-                  <form action="/demo/get-one" method="post">                              
-                        <div>
-                            <p>Donnez l'id de la voiture<p>
-                            <label for="id-in">id</label><br>
-                            <input type="number" name="id" id="id-in">
-                        </div>         
-                        <button type="submit">envoyer</button><br>
-                         <a href = \"./add\">Ajouter un vehicule </a>  <br>
-                        <a href = \"./get-all\">Liste des vehicules </a> <br>
-                        <a href = \"/demo\">Accueil </a> <br>
-                        <a href = \"./contact\">Contact </a>  <br>
-                """);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        PrintWriter out = resp.getWriter();
+        long id = 0;
+        long voitureId = 0;
+        String voitureMarque = " ";
+        String voitureModel = " ";
+        double voiturePrix = 0;
+        req.setAttribute("voitureId", voitureId);
+        req.setAttribute("voitureMarque", voitureMarque);
+        req.setAttribute("voitureModel", voitureModel);
+        req.setAttribute("voiturePrix", voiturePrix);
         String idParam = req.getParameter("id");
-
         try {
-            id = Integer.parseInt( idParam );
-            resp.getWriter().println("""
-                    <!DOCTYPE html>
-                    <html lang="en">
-                    <head>
-                        <meta charset="UTF-8">
-                        <title>Title</title>
-                    </head>
-                    <body>                                    
-                        <h1>La voiture recherchée</h1>                        
-                        <ul>
-                    """ );
-            for (Voiture voiture : service.getAll()){
-                if (voiture.getId() == id){
-                    out.println("<li>["+ voiture.getId()+"] "+voiture.getMarque()+" - "+voiture.getModele()+" - "+voiture.getPrix()+" $</li>");
-                    break;
-                }else {
-                    resp.getWriter().print("Mauvais id");
-                    return;
-                }
-            }
-            out.println("""
-                                    </ul><br>
-                                    <a href = \"./add\">Ajouter un vehicule </a> <br>
-                                    <a href = \"./get-one\">Trouver un vehicule </a> <br>
-                                    <a href = \"./get-all\">Liste des vehicules </a> <br>
-                                    <a href = \"./contact\">Contact </a>  <br>
-                                </body>
-                            </html>
-                        """);
-        }
-        catch (NumberFormatException ex){
+            id = Integer.parseInt(idParam);
+        } catch (NumberFormatException ex) {
             resp.setStatus(400);
             resp.getWriter().print("Choisissez un id !");
         }
+        for (Voiture voiture : service.getAll()) {
+            if (voiture.getId() == id) {
+                voitureId = voiture.getId();
+                voitureMarque = voiture.getMarque();
+                voitureModel = voiture.getModele();
+                voiturePrix = voiture.getPrix();
+                req.setAttribute("voitureId", voitureId);
+                req.setAttribute("voitureMarque", voitureMarque);
+                req.setAttribute("voitureModel", voitureModel);
+                req.setAttribute("voiturePrix", voiturePrix);
+                req.getRequestDispatcher("/voiture/get-one.jsp").forward(req, resp);
+                break;
+            }
+        }
+        req.getRequestDispatcher("/voiture/get-one.jsp").forward(req, resp);
     }
 }
